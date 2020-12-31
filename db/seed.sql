@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS cart;
 DROP TABLE IF EXISTS product;
 
 CREATE TABLE product(
@@ -15,12 +17,22 @@ CREATE TABLE product(
 );
 
 CREATE TABLE cart(
-    cart_id INTEGER PRIMARY KEY,
+    cart_id SERIAL PRIMARY KEY,
     product_id INTEGER REFERENCES product(product_id),
     quantity INTEGER,
     total NUMERIC (6, 2)
 
 );
+
+CREATE TABLE orders(   
+    order_id SERIAL PRIMARY KEY,
+    cart_id INTEGER REFERENCES cart(cart_id),
+    customer_name VARCHAR(50) NOT NULL,
+    customer_address VARCHAR(100) NOT NULL,
+    order_date_time TIMESTAMPTZ NOT NULL DEFAULT NOW(),     
+    total NUMERIC (6, 2)
+);
+
 
 
 INSERT INTO product(
