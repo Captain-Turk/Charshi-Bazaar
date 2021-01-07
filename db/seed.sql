@@ -1,6 +1,18 @@
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS cart;
 DROP TABLE IF EXISTS product;
+DROP TABLE IF EXISTS categories;
+
+CREATE TABLE categories(
+    category_id SERIAL PRIMARY KEY,
+    category_name VARCHAR(20) NOT NULL
+);
+
+INSERT INTO categories
+(category_name)
+VALUES
+('Apparel'), ('Accesories'), ('Headwear'), ('Prize Items'), ('Packages');
+
 
 CREATE TABLE product(
     product_id SERIAL PRIMARY KEY,
@@ -8,10 +20,10 @@ CREATE TABLE product(
     imgUrl TEXT NOT NULL,
     description TEXT [],
     price NUMERIC NOT NULL,
-    size VARCHAR(3),
-    category VARCHAR(20),
+    size VARCHAR(3), 
+    category_id INTEGER REFERENCES categories (category_id),   
     gender VARCHAR(10),
-    quantity INTEGER NOT NULL
+    available_quantity INTEGER NOT NULL
 
 
 );
@@ -35,15 +47,16 @@ CREATE TABLE orders(
 
 
 
+
 INSERT INTO product(
     name ,
     imgUrl,
     description,
     price,
     size,
-    category,
+    category_id,
     gender,
-    quantity
+    available_quantity
 )
 VALUES
 ('Men''s Gray Tee',
@@ -51,7 +64,7 @@ VALUES
  ARRAY ['Next Level - Premium Fitted CVC Crew - 6210', 'Fabric laundered, 4.3 oz., 60/40 combed ringspun cotton/polyester, 32 singles', 'Set-in CVC 1x1 baby rib collar','Tearaway label'],
 11,
 'M',
-'Apparel',
+1,
 'MALE',
 50
 ),
@@ -60,7 +73,7 @@ VALUES
 ARRAY ['2" - Engraved Hardwood Keychains - USA-Made'],
 5,
 'N/A',
-'Accessories',
+2,
 'UNISEX',
 35
 ),
@@ -70,7 +83,7 @@ ARRAY ['2" - Engraved Hardwood Keychains - USA-Made'],
 ARRAY ['Women’s Ideal Colorblocked Racerback Tank', '4.0 oz., 60/40 combed ring-spun cotton/polyester', 'Front and back colorblocking ', 'Self-fabric binding matches color of back panel', 'Curved hem ', 'Side seams', 'Tearaway label'],
 18,
 'S',
-'Apperal',
+1,
 'FEMALE',
 40
 ),
@@ -80,7 +93,7 @@ ARRAY ['Women’s Ideal Colorblocked Racerback Tank', '4.0 oz., 60/40 combed rin
 ARRAY [''],
 10,
 'N/A',
-'Headwear',
+3,
 'UNISEX',
 25
 )

@@ -25,5 +25,20 @@ module.exports = {
             res.status(500).send('Something went wrong, unable to show the product!')
            
         })
-    }
+    },
+
+    getProductsByCategory: (req, res) => {
+        const dbInstance = req.app.get('db')
+
+        dbInstance.get_products_byCategory(category_id)
+        .then(products=> {
+            res.status(200).send(products)
+        })
+        .catch(err=> {  
+            console.log(err)         
+            res.status(500).send(`Something went wrong, unable to get ${category_name}!!!`)
+            
+        })       
+    },
+
 }

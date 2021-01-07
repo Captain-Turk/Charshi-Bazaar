@@ -1,7 +1,8 @@
 import React from 'react'
 import Header from './components/Header/header'
 import Footer from './components/Footer/footer'
-import routes from './routes'
+import Display from './components/Display/display'
+// import routes from './routes'
 
 import './reset.css'
 import './App.css'
@@ -10,7 +11,8 @@ function App() {
   return (
     <div className="App">
       <Header />
-      {routes}
+      {/* {routes} */}
+      <Display />
       <Footer />
     </div>
   )
