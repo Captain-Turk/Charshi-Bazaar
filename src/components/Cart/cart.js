@@ -15,7 +15,7 @@ class Cart extends Component {
 
 
       componentDidMount = () => {
-        axios.get('api/cart')
+        axios.get('/api/cart')
         .then(res => {
           this.setState({
             cart: res.data                    
@@ -59,6 +59,14 @@ class Cart extends Component {
         })
       }
 
+      removeItemFromCart(id){
+        axios.delete(`/api/cart/item/${id}`).then(res => {
+          this.setState({
+            cart: res.data
+          })
+        })
+      }
+
  
       checkout(cart_id, customer_name, customer_address, total){
           axios.checkOut('/api/orders', {cart_id, customer_name, customer_address, total}).then((res) => {
@@ -72,24 +80,29 @@ class Cart extends Component {
 
 
     render(){
-        const {cart} = this.state
+        const {cart} = this.props
+        console.log("props.cart",this.props.cart)
+        let mappedCart
+        if(cart){
+        mappedCart = cart.map((item) => { 
+          return (
+            <CartItem
+              changeQuantity={this.changeQuantity}
+              emptyCart = {this.emptyCart}
+              key={item.product_id}
+              cartInfo={item}
+            />
+        )
+        })
+      }
         return (
             <div className="cart-container">
               <div className="cart"> 
                 <h2>My Cart</h2>
-                {cart.map((item) => { 
-                  return (
-                    <CartItem
-                      changeQuantity={this.changeQuantity}
-                      emptyCart = {this.emptyCart}
-                      key={item.product_id}
-                      data={item}
-                    />
-                )
-                })} 
+                {mappedCart}
             </div>
                 <div className="total">
-                 Your total: ${cart.total}
+                 {/* Your total: ${cart.total} */}
                 <button onClick={this.checkout}>Checkout</button>
               </div>
             </div>

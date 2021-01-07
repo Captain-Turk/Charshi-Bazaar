@@ -1,2 +1,3 @@
 SELECT * FROM cart
-WHERE cart_id = $1;
+join product on cart.product_id = product.product_id
+Where cart_id = '1';

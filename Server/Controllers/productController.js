@@ -40,5 +40,14 @@ module.exports = {
             
         })       
     },
+    getQueryResults: (req, res) => {
+        const db = req.app.get('db')
+        const {query} = req.params
+        console.log("query",query)
+        db.get_query_results(query).then(results => {
+            console.log(results)
+            res.status(200).send(results)
+        })
+    }
 
 }

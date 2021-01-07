@@ -1,49 +1,45 @@
-import React, {Component} from 'react'
+import React, { Component } from "react";
 
-class Search extends Component{
-    constructor(props){
-        super(props)
-        this.state ={
-            query: '', 
-            data: this.props.inventory,           
-            searchResult:[]
+class Search extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      query: "",
+      data: this.props.inventory,
+      searchResult: [],
+    };
+  }
 
-        }
-    }
-
-    handleInputChange = (event) => {        
-        this.setState({
-            [event.target.query]: event.target.value
-        })
-
-        this.setState(prevState => {
-            const searchResult = prevState.data.filter(element => {
-                return element.name.toLowerCase().includes(this.state.query.toLowerCase());
-
-            })
-
-            return searchResult
-            
-        })
-
-
-    }
+  handleInputChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
 
 
 
-    render(){
-        return(
-        <div className='Search-Box'>
-            <input  className="Search-Input"  type="text"
-                    placeholder="Search..."
-                    value={this.state.query}
-                    onChange={(e)=>this.handleInputChange(e)}
+  render() {
+      const {query} = this.state
+      console.log("search",this.props)
+    return (
+      <div className="Search-Box">
+          <form onSubmit={(e) => this.props.search(e, query)}>
+        <input
+          className="Search-Input"
+          type="text"
+          name='query'
+          placeholder="Search..."
+          value={this.state.query}
+          onChange={(e) => this.handleInputChange(e)}
         />
-        <button className='Search-Button' onClick={this.handleInputChange}> Search </button>
-        </div>
-
-        )
-    }
+        <input type='submit' value='Submit'></input>
+        </form>
+        <button className="Search-Button" onClick={this.props.reset}>
+      Reset
+        </button>
+      </div>
+    );
+  }
 }
 
-export default Search
+export default Search;

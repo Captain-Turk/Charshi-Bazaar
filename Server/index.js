@@ -6,6 +6,7 @@ const productCtrl = require('./Controllers/productController')
 const cartCtrl= require('./Controllers/cartController')
 const orderCtrl = require('./Controllers/orderController' )
 const categoryCtrl = require('./Controllers/categoryController')
+const productController = require('./Controllers/productController')
 
 const {SERVER_PORT, CONNECTION_STRING} = process.env
 
@@ -19,8 +20,8 @@ app.get('/api/products', productCtrl.getAllProducts)
 app.get('/api/products/:product_id', productCtrl.getOneProduct)
 app.get('/api/products/:category_id',productCtrl.getProductsByCategory)
 
-
-app.get('/api/cart', cartCtrl.getCart)
+app.get('/api/search/:query', productController.getQueryResults)
+app.get('/api/cart/:cart_id', cartCtrl.getCart)
 app.post('/api/cart', cartCtrl.newCart)
 app.put('/api/cart/:cart_id', cartCtrl.updateCart)
 app.delete('/api/cart/:cart_id', cartCtrl.emptyCart)
