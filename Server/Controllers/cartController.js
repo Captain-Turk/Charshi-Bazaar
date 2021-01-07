@@ -11,16 +11,22 @@ module.exports = {
     const dbInstance = req.app.get('db')    
     // const {cart_id, total, product_id, quantity } = req.body
     // const { cart_id } = req.params
-    const {cart_id, total, product_id, quantity } = req.body
+    const {product_id, quantity } = req.body
+    console.log(product_id, quantity )
 
-    dbInstance.new_cart(cart_id,product_id,quantity,total)
+    dbInstance.new_cart(1,product_id,quantity)
     .then(cart=>{
         res.status(200).send(cart)
+    }).catch(err=>{
+      console.log(err)
+      res.status(500).send('Something wronk with add to cart')
     })
-   
- },
+  },
+    
+
+
   
- updateCart: (req, res) => {
+    updateCart: (req, res) => {
     const dbInstance = req.app.get('db')     
     const { cart_id } = req.params
     const {total, product_id, quantity } = req.body

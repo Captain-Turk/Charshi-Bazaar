@@ -9,7 +9,7 @@ const Header =(props) =>{
 
     return(
         <div>
-             <p>Charshi Bazaar</p>
+             <h1>Charshi Bazaar</h1>
         <CategoryList />
         <Search />
         <Cart />

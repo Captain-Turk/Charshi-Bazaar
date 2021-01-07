@@ -1,12 +1,11 @@
 INSERT INTO cart(
-    cart_id, 
+    cart_id,
     product_id,
-    quantity,
-    total 
+    quantity
 )
 
 VALUES
-($1, $2, $3, $4);
+($1, $2,$3);
 
 SELECT * FROM cart
-WHERE cart_id = $1;
+-- WHERE cart_id = $1;

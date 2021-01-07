@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+
 class CategoryList extends Component {
   constructor() {
     super();
@@ -23,6 +24,15 @@ class CategoryList extends Component {
     }).catch(err=> console.log(err))
   };
 
+  getProductByCategory = (category_id) => {
+    axios.get('api/products/:category_id')
+    .then((res) => {
+      this.setState({
+        categories: res.data
+      })
+    }).catch(err=> console.log(err))
+  };
+
   changeCategory = (category) => {
     if (this.state.selectedCategory === category.category_name)
       this.setState({
@@ -32,7 +42,7 @@ class CategoryList extends Component {
       this.setState({
         selectedCategory: category.category_name,
       });
-    this.props.getAllProducts(category.category_id);
+    this.getProductsByCategory(category.category_id);
   };
 
   render() {
@@ -41,20 +51,20 @@ class CategoryList extends Component {
       <div className="Category-List">
         <ul>
           <li>
-            {/* {categories.map((category) => (                                          
-              <Category
+            {categories.map((category) => (                                          
+              <category
                 key={category.category_id}
                 name ={category.category_name}
                 category={category}
-                onClick={() => this.changeCategory(category)}
+                onClick={() => this.changeCategory(category)}/>
                 // hover
                 // active={
                 //   category === this.state.selectedCategory ? true : false
                 // }
                 // action
                 // onClick={() => this.state.changeCategory(category)} />
-              />
-            ))} */}
+              // />
+            ))}
           </li>
         </ul>
       </div>

@@ -43,13 +43,13 @@ class Cart extends Component {
     
     
 
-    componentDidUpdate(cart_id, product_id, quantity, total) {
-        axios.put(`/api/cart/${cart_id}`,{product_id,quantity,total}).then((res) => {
-          this.setState({
-            cart: res.data,
-          })
-        })
-      }
+    // componentDidUpdate(cart_id, product_id, quantity, total) {
+    //     axios.put(`/api/cart/${cart_id}`,{product_id,quantity,total}).then((res) => {
+    //       this.setState({
+    //         cart: res.data,
+    //       })
+    //     })
+    //   }
     
       emptyCart(cart_id) {
         axios.delete(`/api/cart/${cart_id}`).then((res) => {

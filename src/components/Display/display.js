@@ -13,11 +13,8 @@ class Display extends Component {
       super()
         this.state = {
           inventory: [],
-          cart:[]
-          // cart:[{
-          //   product_id, 
-          //   quantity}]
-           
+          cart:[],
+         
           }
                   
          
@@ -41,7 +38,10 @@ class Display extends Component {
 
     
 
-    newCart = (product_id) => {
+    // newCart = (product_id) => {
+     
+
+    addToCart = (product_id) => {
       axios.post('api/cart', {product_id, quantity:1})
       .then(res=>{
         this.setState({
@@ -49,19 +49,17 @@ class Display extends Component {
         })
       }).catch(err=> console.log(err)) 
     }
-
-    addToCart = (product) => {
-      let {cart,inventory}= this.state
-      var addedItem = cart.find(cartItem => cartItem.product_id === product.product_id);
-      if (addedItem) {
-        addedItem.quantity += 1;
-      } else {
-        cart.push({ product: product, quantity: 1 });
-      }
+      // let {cart,inventory}= this.state
+      // var addedItem = cart.find(cartItem => cartItem.product_id === product.product_id);
+      // if (addedItem) {
+      //   addedItem.quantity += 1;
+      // } else {
+      //   this.setState({ cart: product_id, quantity: 1 });
+      // }
   
-      this.setState({ cart: cart });
-      alert(`${inventory.name} in basket`);
-    };
+      // this.setState({ cart: cart });
+      // alert(`${inventory.name} in basket`);
+  
 
 
     // addToCart = (product) => {
